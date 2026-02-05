@@ -1,0 +1,7 @@
+{
+  "name": "HSF International Rebuild",
+  "description": "A pixel-perfect rebuild of the HSF International corporate website featuring a responsive design, animations, and a modern UI.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

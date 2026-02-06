@@ -7,10 +7,12 @@ import ServicesPage from './views/ServicesPage';
 import ContactPage from './views/ContactPage';
 import MediaPage from './views/MediaPage';
 import BlogPage from './views/BlogPage';
+import ChairmanProfile from './views/ChairmanProfile';
+import Portfolio from './views/Portfolio';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -25,6 +27,9 @@ const App: React.FC = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/chairman" element={<ChairmanProfile />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          {/* Keep other pages as placeholders or remove if not needed, keeping for now */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact" element={<ContactPage />} />

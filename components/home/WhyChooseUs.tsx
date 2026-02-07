@@ -1,6 +1,6 @@
-import React from 'react';
 import Button from '../Button';
 import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const OpportunityCTA = () => {
     return (
@@ -48,10 +48,16 @@ export const WhyChooseUs = () => {
                                         <span className="font-bold text-coral-500">{stat.value}%</span>
                                     </div>
                                     <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                                        <div
-                                            className="h-full bg-navy-900 rounded-full"
-                                            style={{ width: `${stat.value}%` }}
-                                        ></div>
+                                        <motion.div
+                                            initial={{ width: 0, backgroundColor: "#FF6B6B" }}
+                                            whileInView={{
+                                                width: `${stat.value}%`,
+                                                backgroundColor: ["#FF6B6B", "#fbbf24", "#22c55e"]
+                                            }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 2.5, ease: "easeOut", delay: i * 0.2 }}
+                                            className="h-full rounded-full relative"
+                                        />
                                     </div>
                                 </div>
                             ))}

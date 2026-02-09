@@ -3,6 +3,7 @@ import MotionWrapper from '../components/MotionWrapper';
 import { Target, Shield, Users, Check, Download, FileText } from 'lucide-react';
 import Button from '../components/Button';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import BoardOfDirectors from '../components/home/BoardOfDirectors';
 
 // Individual Timeline Event Component for Scroll Awareness
 const TimelineEvent = ({ event, index, isLast }: { event: any, index: number, isLast: boolean }) => {
@@ -545,6 +546,9 @@ const AboutPage = () => {
                 </div>
             </section>
 
+            {/* Board of Directors */}
+            <BoardOfDirectors />
+
             {/* 7. Team Section - FIFA Style Ratings */}
             <section className="py-24 bg-[#f8f7f4] relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -555,20 +559,7 @@ const AboutPage = () => {
 
                     <div className="grid lg:grid-cols-2 gap-x-8 gap-y-20">
                         {[
-                            {
-                                name: "Hussein Abdullah",
-                                role: "Chairman / CEO",
-                                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop", // Placeholder CEO
-                                overall: 93,
-                                quote: "Vision is the art of seeing what is invisible to others.",
-                                stats: [
-                                    { label: "Vision", value: 98 },
-                                    { label: "Strategy", value: 95 },
-                                    { label: "Execution", value: 92 },
-                                    { label: "Innovation", value: 88 },
-                                    { label: "Leadership", value: 94 }
-                                ]
-                            },
+                            // Hussein removed, starting with Sarah
                             {
                                 name: "Sarah N. K.",
                                 role: "Director of Operations",

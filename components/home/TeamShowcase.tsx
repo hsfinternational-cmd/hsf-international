@@ -5,8 +5,6 @@ import MotionWrapper from '../MotionWrapper';
 
 // Employee Data (7 Stats)
 const team = [
-    // Tier 1: Chairman
-    { id: 1, name: "Hussein Abdullah", role: "Chairman & Founder", linkedin: "#", image: null, stats: { integrity: 99, success: 99, professionalism: 99, energy: 95, comms: 98, strategy: 99, innovation: 97 } },
     // Tier 2: Executives
     { id: 2, name: "Sarah N.", role: "Chief Operations Officer", linkedin: "#", image: null, stats: { integrity: 97, success: 97, professionalism: 98, energy: 94, comms: 96, strategy: 98, innovation: 95 } },
     { id: 3, name: "David O.", role: "Head of Strategy", linkedin: "#", image: null, stats: { integrity: 96, success: 96, professionalism: 97, energy: 92, comms: 95, strategy: 99, innovation: 96 } },
@@ -172,9 +170,9 @@ const EmployeeCard = ({ member, isExecutive = false }: { member: typeof team[0],
 );
 
 const TeamShowcase = () => {
-    const chairman = team[0];
-    const execs = team.slice(1, 3);
-    const management = team.slice(3);
+    // Chairman is now in BoardOfDirectors, so execs are the first 2 in this list
+    const execs = team.slice(0, 2);
+    const management = team.slice(2);
 
     return (
         <section className="bg-navy-900 py-24 border-t border-white/5 relative overflow-hidden">
@@ -201,14 +199,7 @@ const TeamShowcase = () => {
                 {/* Hierarchy Layout */}
                 <div className="space-y-16">
 
-                    {/* Level 1: Chairman */}
-                    <div className="flex justify-center -mb-8 relative z-30">
-                        <MotionWrapper variant="fade-up" className="w-full max-w-sm transform scale-110">
-                            <EmployeeCard member={chairman} isExecutive={true} />
-                        </MotionWrapper>
-                    </div>
-
-                    {/* Level 2: Executives */}
+                    {/* Level 1: Executives (formerly Level 2) */}
                     <div className="flex flex-col md:flex-row justify-center gap-6 relative z-20">
                         {execs.map((member, i) => (
                             <MotionWrapper key={member.id} variant="fade-up" delay={0.1 + (i * 0.1)} className="w-full max-w-[340px]">

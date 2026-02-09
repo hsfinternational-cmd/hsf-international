@@ -14,6 +14,7 @@ import SustainableSuccess from '../components/home/SustainableSuccess';
 import GlobalPartners from '../components/home/GlobalPartners';
 import HowWeWork from '../components/home/HowWeWork';
 import DiplomaticReach from '../components/home/DiplomaticReach';
+import BoardOfDirectors from '../components/home/BoardOfDirectors';
 import TeamShowcase from '../components/home/TeamShowcase';
 import Button from '../components/Button';
 import { Download, FileText } from 'lucide-react';
@@ -22,8 +23,6 @@ const Home = () => {
     return (
         <div className="flex flex-col w-full overflow-hidden bg-navy-900">
             <Hero />
-
-
 
             {/* Feature Row (Advice, Great Solutions, Trusted Partnerships) */}
             <FeatureRow />
@@ -57,6 +56,9 @@ const Home = () => {
 
             {/* Diplomatic Reach (Section Moved) */}
             <DiplomaticReach />
+
+            {/* Board of Directors */}
+            <BoardOfDirectors />
 
             {/* Team Showcase (Details + HSF Model Headline) */}
             <TeamShowcase />
@@ -98,7 +100,7 @@ const Home = () => {
                                     className="w-full md:w-auto"
                                 >
                                     <span className="flex items-center gap-2">
-                                        <Download className="w-4 h-4" /> Download Chairman's Bio
+                                        <FileText className="w-4 h-4" /> Download Chairman's Bio
                                     </span>
                                 </Button>
                             </div>

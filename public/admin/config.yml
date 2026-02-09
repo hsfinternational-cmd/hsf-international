@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "media"
+        label: "Media & News"
+        file: "src/data/media.json"
+        fields:
+          - {label: "Stories", name: "stories", widget: "list", fields: [
+              {label: "ID", name: "id", widget: "hidden", default: ""},
+              {label: "Category", name: "category", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Headline", name: "headline", widget: "string"},
+              {label: "Date/Status", name: "date", widget: "string"},
+              {label: "Image", name: "image", widget: "image"},
+              {label: "Description", name: "desc", widget: "text"},
+              {label: "Link", name: "link", widget: "string", default: "#"},
+              {label: "Type", name: "type", widget: "select", options: ["csr", "news"], default: "news"}
+            ]}
+      
+      - name: "gallery"
+        label: "Gallery Items"
+        file: "src/data/gallery.json"
+        fields:
+          - {label: "Gallery Images", name: "items", widget: "list", fields: [
+              {label: "ID", name: "id", widget: "hidden"},
+              {label: "Type", name: "type", widget: "select", options: ["image", "video"]},
+              {label: "Image/Thumbnail", name: "src", widget: "image"},
+              {label: "Caption", name: "caption", widget: "string"},
+              {label: "Size", name: "size", widget: "select", options: ["small", "large", "tall"]}
+            ]}

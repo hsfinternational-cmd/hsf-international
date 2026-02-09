@@ -1,6 +1,7 @@
 import React from 'react';
 import MotionWrapper from '../components/MotionWrapper';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { companyInfo } from '../src/data/company';
 
 const ContactPage = () => {
     return (
@@ -24,9 +25,9 @@ const ContactPage = () => {
 
                             <div className="flex items-start gap-4 mb-6">
                                 <div className="bg-coral-100 p-3 rounded text-coral-600"><MapPin className="w-5 h-5" /></div>
-                                <div>
+                                <div className="max-w-[200px]">
                                     <h4 className="font-bold text-navy-900">Visit Us</h4>
-                                    <p className="text-slate-600 text-sm">8th Floor, Aries Towers<br />Mackinnon Road, Nakasero<br />Kampala, Uganda</p>
+                                    <p className="text-slate-600 text-sm">{companyInfo.address}</p>
                                 </div>
                             </div>
 
@@ -34,7 +35,7 @@ const ContactPage = () => {
                                 <div className="bg-coral-100 p-3 rounded text-coral-600"><Phone className="w-5 h-5" /></div>
                                 <div>
                                     <h4 className="font-bold text-navy-900">Call Us</h4>
-                                    <p className="text-slate-600 text-sm">+256 393 000 578</p>
+                                    <p className="text-slate-600 text-sm">{companyInfo.phone}</p>
                                 </div>
                             </div>
 
@@ -42,7 +43,7 @@ const ContactPage = () => {
                                 <div className="bg-coral-100 p-3 rounded text-coral-600"><Mail className="w-5 h-5" /></div>
                                 <div>
                                     <h4 className="font-bold text-navy-900">Email Us</h4>
-                                    <p className="text-slate-600 text-sm">info@hsf.co.ug</p>
+                                    <p className="text-slate-600 text-sm">{companyInfo.email}</p>
                                 </div>
                             </div>
 
@@ -50,7 +51,7 @@ const ContactPage = () => {
                                 <div className="bg-coral-100 p-3 rounded text-coral-600"><Clock className="w-5 h-5" /></div>
                                 <div>
                                     <h4 className="font-bold text-navy-900">Work Hours</h4>
-                                    <p className="text-slate-600 text-sm">Mon - Sat: 8:00 AM - 5:00 PM</p>
+                                    <p className="text-slate-600 text-sm">{companyInfo.workHours}</p>
                                 </div>
                             </div>
                         </MotionWrapper>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, Twitter, Instagram, Youtube, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Clock, Twitter, Instagram, Youtube, MapPin, Send, MessageCircle, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { companyInfo, footerLinks } from '../src/data/company';
 
 const Footer = () => {
     // Animation Variants
@@ -85,19 +86,23 @@ const Footer = () => {
                                 />
                             </div>
                             <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                                {companyInfo.tagline}
+                                <br />
                                 We are a global contractor-aggregator, bridging international expertise with local execution.
-                                Building the future of infrastructure, energy, and logistics.
                             </p>
                         </div>
                         <div className="flex gap-3">
                             {[
-                                { Icon: Twitter, link: "#" },
-                                { Icon: Instagram, link: "#" },
-                                { Icon: Youtube, link: "#" }
+                                { Icon: Twitter, link: companyInfo.socials.twitter },
+                                { Icon: Instagram, link: companyInfo.socials.instagram },
+                                { Icon: Youtube, link: companyInfo.socials.youtube },
+                                { Icon: Linkedin, link: companyInfo.socials.linkedin }
                             ].map(({ Icon, link }, i) => (
                                 <motion.a
                                     key={i}
                                     href={link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     whileHover={{ scale: 1.2, rotate: 10, backgroundColor: "#ffffff", color: "#f97316" }}
                                     className="w-10 h-10 rounded-full bg-coral-500 flex items-center justify-center text-white transition-all shadow-lg shadow-coral-500/20"
                                 >
@@ -111,13 +116,7 @@ const Footer = () => {
                     <motion.div variants={itemVariants}>
                         <h4 className="font-heading font-bold text-lg text-white mb-8 border-l-4 border-coral-500 pl-4">Quick Links</h4>
                         <ul className="space-y-4">
-                            {[
-                                { name: 'Home', path: '/' },
-                                { name: 'About Us', path: '/about' },
-                                { name: 'Services', path: '/services' },
-                                { name: 'Cases/ Projects', path: '/portfolio' },
-                                { name: 'Contact Us', path: '/contact' }
-                            ].map((item) => (
+                            {footerLinks.quick.map((item) => (
                                 <li key={item.name}>
                                     <Link to={item.path}>
                                         <motion.div
@@ -134,26 +133,16 @@ const Footer = () => {
 
                     {/* Column 3: Useful Links */}
                     <motion.div variants={itemVariants}>
-                        <h4 className="font-heading font-bold text-lg text-white mb-8 border-l-4 border-coral-500 pl-4">Useful Links</h4>
+                        <h4 className="font-heading font-bold text-lg text-white mb-8 border-l-4 border-coral-500 pl-4">Services</h4>
                         <ul className="space-y-4">
-                            {[
-                                'ICT Services',
-                                'Financing Services',
-                                'Engineering Services',
-                                'Oil and Gas Services',
-                                'Logistics & Transportation',
-                                'Agriculture and Agribusiness',
-                                'Tourism (Hospitality and Travel)',
-                                'Supply and Maintenance of Motor Vehicles',
-                                'Waste Management'
-                            ].map((item) => (
-                                <li key={item}>
+                            {footerLinks.services.map((service) => (
+                                <li key={service}>
                                     <Link to="/services">
                                         <motion.div
                                             whileHover={linkHover}
                                             className="text-slate-400 text-xs font-medium inline-block"
                                         >
-                                            {item}
+                                            {service}
                                         </motion.div>
                                     </Link>
                                 </li>
@@ -167,11 +156,11 @@ const Footer = () => {
 
                         <div className="flex items-center gap-3 mb-6 bg-navy-800/50 p-4 rounded-lg border border-navy-700">
                             <Clock className="w-5 h-5 text-coral-500" />
-                            <span className="text-slate-300 text-xs font-bold uppercase">8 AM - 5 PM , Monday - Saturday</span>
+                            <span className="text-slate-300 text-xs font-bold uppercase">{companyInfo.workHours}</span>
                         </div>
 
                         <p className="text-slate-400 text-xs leading-relaxed mb-8 pl-2 border-l border-navy-700">
-                            8th Floor, Aries Towers, 16 Mackinnon Rd, Kampala, Uganda
+                            {companyInfo.address}
                         </p>
 
                         <motion.button
@@ -180,7 +169,7 @@ const Footer = () => {
                             className="bg-coral-500 text-white font-bold px-8 py-4 text-sm shadow-xl shadow-coral-500/20 hover:bg-white hover:text-coral-500 transition-all w-full rounded-lg"
                             onClick={() => window.location.href = '/contact'}
                         >
-                            Call Us Today
+                            Contact Us Today
                         </motion.button>
                     </motion.div>
                 </motion.div>
@@ -190,7 +179,7 @@ const Footer = () => {
 
                     <div className="flex flex-col md:flex-row gap-4 items-center">
                         <p className="text-slate-500 text-[10px] text-center md:text-left">
-                            © {new Date().getFullYear()} Copyright - <span className="text-white font-bold">HSF International East Africa</span>. All Rights Reserved.
+                            © {new Date().getFullYear()} Copyright - <span className="text-white font-bold">{companyInfo.name}</span>. All Rights Reserved.
                         </p>
                     </div>
 
@@ -208,12 +197,13 @@ const Footer = () => {
 
             {/* Chat Widget Button (Fixed) */}
             <motion.a
-                href="https://wa.me/256700000000" // Replace with actual number
+                href={companyInfo.socials.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 whileTap={{ scale: 0.9 }}
                 className="fixed bottom-8 right-8 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white shadow-2xl z-50 cursor-pointer hover:bg-green-400 transition-colors"
+                aria-label="Chat on WhatsApp"
             >
                 <MessageCircle className="w-8 h-8 fill-current" />
             </motion.a>

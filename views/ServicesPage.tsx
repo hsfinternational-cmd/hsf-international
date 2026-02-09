@@ -60,15 +60,46 @@ const ServicesPage = () => {
             {/* Grid */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {services.map((service, idx) => (
-                        <MotionWrapper key={idx} delay={idx * 0.05} variant="fade-up" className="bg-white p-8 rounded shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-transparent hover:border-coral-500 group">
-                            <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-navy-900 mb-6 group-hover:bg-coral-500 group-hover:text-white transition-colors">
-                                <service.icon className="w-6 h-6" />
-                            </div>
-                            <h3 className="font-heading font-bold text-xl text-navy-900 mb-3">{service.title}</h3>
-                            <p className="text-slate-500 text-sm leading-relaxed">{service.desc}</p>
-                        </MotionWrapper>
-                    ))}
+                    {services.map((service, idx) => {
+                        const slug = service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                        return (
+                            <a
+                                key={idx}
+                                href={`#/services/${slug}`}
+                                className="block group relative overflow-hidden"
+                            >
+                                <MotionWrapper
+                                    delay={idx * 0.05}
+                                    variant="fade-up"
+                                    className="h-full bg-white p-10 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 hover:border-coral-500/0 relative z-10 flex flex-col min-h-[320px] group-hover:bg-navy-900 group-hover:text-white"
+                                >
+                                    {/* Icon */}
+                                    <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-navy-900 mb-8 group-hover:bg-coral-500 group-hover:text-white transition-all duration-500 flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6">
+                                        <service.icon className="w-8 h-8" />
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="flex-grow">
+                                        <h3 className="font-heading font-black text-2xl text-navy-900 mb-4 group-hover:text-white transition-colors">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-slate-500 text-base leading-relaxed group-hover:text-slate-300 transition-colors">
+                                            {service.desc}
+                                        </p>
+                                    </div>
+
+                                    {/* Explore Link */}
+                                    <div className="mt-8 flex items-center gap-2 font-bold text-coral-500 uppercase tracking-widest text-xs group-hover:text-white transition-colors">
+                                        <span>Explore Sector</span>
+                                        <span className="transform group-hover:translate-x-2 transition-transform duration-300">→</span>
+                                    </div>
+
+                                    {/* Watermark Icon (Hover) */}
+                                    <service.icon className="absolute -bottom-8 -right-8 w-64 h-64 text-white opacity-0 group-hover:opacity-5 transition-opacity duration-700 pointer-events-none transform group-hover:scale-125" />
+                                </MotionWrapper>
+                            </a>
+                        );
+                    })}
                 </div>
             </section>
 

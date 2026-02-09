@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Phone, Mic, Menu, X } from 'lucide-react';
-import Button from './Button';
+import { Search, Phone, Mic, Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const location = useLocation();
 
     useEffect(() => {
@@ -16,13 +17,28 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const servicesList = [
+        { name: "Energy & Oil/Gas", path: "/services/energy-oil-gas" },
+        { name: "Logistics & Fleet", path: "/services/logistics-fleet" },
+        { name: "ICT & Security", path: "/services/ict-security" },
+        { name: "Civil Engineering", path: "/services/civil-engineering" },
+        { name: "Agriculture", path: "/services/agriculture" },
+        { name: "Tourism & Travel", path: "/services/tourism-travel" },
+        { name: "Waste Management", path: "/services/waste-management" },
+        { name: "Technical Maintenance", path: "/services/technical-maintenance" }
+    ];
+
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/about' },
-        { name: 'Services', path: '/services' },
-        { name: 'Cases', path: '/portfolio' }, // Mapped to portfolio
+        {
+            name: 'Services',
+            path: '/services',
+            subItems: servicesList
+        },
+        { name: 'Cases', path: '/portfolio' },
         { name: 'Media', path: '/media' },
-        { name: 'Blog', path: '/blog' },
+        { name: 'Gallery', path: '/gallery' },
         { name: 'Contact Us', path: '/contact' },
     ];
 
@@ -34,7 +50,6 @@ const Navbar = () => {
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center gap-3">
                         <div className="flex flex-col items-center justify-center">
-                            {/* Approximating the H icon based on screenshot */}
                             <div className="text-navy-900 font-heading font-black text-4xl leading-none">H</div>
                         </div>
                         <div className="flex flex-col border-l border-navy-900/20 pl-3">
@@ -46,16 +61,40 @@ const Navbar = () => {
                     {/* Center Navigation Links */}
                     <div className="hidden xl:flex items-center gap-8">
                         {navLinks.map((link) => (
-                            <Link
+                            <div
                                 key={link.name}
-                                to={link.path}
-                                className={`text-[13px] font-bold uppercase tracking-wide transition-colors duration-300 ${location.pathname === link.path || (link.path === '/' && location.pathname === '/')
-                                        ? 'text-coral-500' // Active color from screenshot
-                                        : 'text-navy-900 hover:text-coral-500'
-                                    }`}
+                                className="relative group"
+                                onMouseEnter={() => link.subItems && setActiveDropdown(link.name)}
+                                onMouseLeave={() => link.subItems && setActiveDropdown(null)}
                             >
-                                {link.name}
-                            </Link>
+                                <Link
+                                    to={link.path}
+                                    className={`flex items-center gap-1 text-[13px] font-bold uppercase tracking-wide transition-colors duration-300 ${location.pathname === link.path || (link.path === '/' && location.pathname === '/')
+                                        ? 'text-coral-500'
+                                        : 'text-navy-900 hover:text-coral-500'
+                                        }`}
+                                >
+                                    {link.name}
+                                    {link.subItems && <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />}
+                                </Link>
+
+                                {/* Desktop Dropdown */}
+                                {link.subItems && (
+                                    <div className="absolute top-full left-0 pt-4 hidden group-hover:block w-64">
+                                        <div className="bg-white rounded-lg shadow-xl border border-slate-100 overflow-hidden py-2">
+                                            {link.subItems.map((sub, idx) => (
+                                                <Link
+                                                    key={idx}
+                                                    to={sub.path}
+                                                    className="block px-6 py-3 text-[11px] font-bold uppercase tracking-wider text-navy-900 hover:bg-slate-50 hover:text-coral-500 transition-colors border-l-2 border-transparent hover:border-coral-500"
+                                                >
+                                                    {sub.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         ))}
                     </div>
 
@@ -102,17 +141,36 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="xl:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl">
+                <div className="xl:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl max-h-[80vh] overflow-y-auto">
                     <div className="px-4 py-6 space-y-4 flex flex-col">
                         {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-navy-900 hover:text-coral-500 font-bold text-sm uppercase px-2 py-2"
-                            >
-                                {link.name}
-                            </Link>
+                            <div key={link.name}>
+                                <div className="flex justify-between items-center">
+                                    <Link
+                                        to={link.path}
+                                        onClick={() => !link.subItems && setIsMobileMenuOpen(false)}
+                                        className="text-navy-900 hover:text-coral-500 font-bold text-sm uppercase px-2 py-2 block w-full"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </div>
+
+                                {/* Mobile Sub-items */}
+                                {link.subItems && (
+                                    <div className="pl-6 border-l-2 border-slate-100 mt-2 space-y-2">
+                                        {link.subItems.map((sub, idx) => (
+                                            <Link
+                                                key={idx}
+                                                to={sub.path}
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                className="block text-slate-500 hover:text-coral-500 text-xs font-bold uppercase py-1"
+                                            >
+                                                {sub.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         ))}
                     </div>
                 </div>

@@ -6,9 +6,10 @@ import ServicesPage from './views/ServicesPage';
 import ContactPage from './views/ContactPage';
 import AboutPage from './views/AboutPage';
 import MediaPage from './views/MediaPage';
-import BlogPage from './views/BlogPage';
+import GalleryPage from './views/GalleryPage';
 import ChairmanProfile from './views/ChairmanProfile';
 import Portfolio from './views/Portfolio';
+import ServiceDetail from './views/ServiceDetail';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -31,10 +32,11 @@ const App: React.FC = () => {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* Keep other pages as placeholders or remove if not needed */}
           <Route path="/media" element={<MediaPage />} />
-          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           {/* Fallback for other pages to Home for this demo */}
           <Route path="*" element={<Home />} />
         </Routes>

@@ -43,19 +43,31 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed w-full z-50 bg-white shadow-sm transition-all duration-300 font-sans`}>
+        <nav className={`fixed w-full z-50 bg-navy-950/95 backdrop-blur-md shadow-lg transition-all duration-300 font-sans border-b border-white/5`}>
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-24">
 
                     {/* Logo Section */}
+                    {/* Logo Section */}
                     <Link to="/" className="flex items-center gap-3">
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="text-navy-900 font-heading font-black text-4xl leading-none">H</div>
-                        </div>
-                        <div className="flex flex-col border-l border-navy-900/20 pl-3">
-                            <span className="text-navy-900 font-black text-lg leading-none tracking-tight">HSF</span>
-                            <span className="text-xs font-bold text-slate-500 tracking-widest uppercase">INTERNATIONAL</span>
-                        </div>
+                        <motion.img
+                            src="/assets/logo-full.jpg"
+                            alt="HSF International"
+                            className="h-16 w-auto object-contain mix-blend-screen"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{
+                                opacity: 1,
+                                x: 0,
+                                scale: [1, 1.02, 1],
+                                filter: ["brightness(1)", "brightness(1.1)", "brightness(1)"]
+                            }}
+                            transition={{
+                                opacity: { duration: 0.5 },
+                                x: { duration: 0.5 },
+                                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                                filter: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                            }}
+                        />
                     </Link>
 
                     {/* Center Navigation Links */}
@@ -71,7 +83,7 @@ const Navbar = () => {
                                     to={link.path}
                                     className={`flex items-center gap-1 text-[13px] font-bold uppercase tracking-wide transition-colors duration-300 ${location.pathname === link.path || (link.path === '/' && location.pathname === '/')
                                         ? 'text-coral-500'
-                                        : 'text-navy-900 hover:text-coral-500'
+                                        : 'text-slate-300 hover:text-coral-500'
                                         }`}
                                 >
                                     {link.name}
@@ -81,12 +93,12 @@ const Navbar = () => {
                                 {/* Desktop Dropdown */}
                                 {link.subItems && (
                                     <div className="absolute top-full left-0 pt-4 hidden group-hover:block w-64">
-                                        <div className="bg-white rounded-lg shadow-xl border border-slate-100 overflow-hidden py-2">
+                                        <div className="bg-navy-900 rounded-lg shadow-xl border border-white/10 overflow-hidden py-2">
                                             {link.subItems.map((sub, idx) => (
                                                 <Link
                                                     key={idx}
                                                     to={sub.path}
-                                                    className="block px-6 py-3 text-[11px] font-bold uppercase tracking-wider text-navy-900 hover:bg-slate-50 hover:text-coral-500 transition-colors border-l-2 border-transparent hover:border-coral-500"
+                                                    className="block px-6 py-3 text-[11px] font-bold uppercase tracking-wider text-slate-300 hover:bg-white/5 hover:text-coral-500 transition-colors border-l-2 border-transparent hover:border-coral-500"
                                                 >
                                                     {sub.name}
                                                 </Link>
@@ -102,26 +114,26 @@ const Navbar = () => {
                     <div className="hidden lg:flex items-center gap-6">
 
                         {/* Search Icon */}
-                        <button className="text-navy-900 hover:text-coral-500 transition-colors">
+                        <button className="text-white hover:text-coral-500 transition-colors">
                             <Search className="w-5 h-5" />
                         </button>
 
                         {/* Vertical Divider */}
-                        <div className="h-8 w-px bg-slate-200"></div>
+                        <div className="h-8 w-px bg-white/10"></div>
 
                         {/* Phone Info */}
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-navy-900">
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white">
                                 <Phone className="w-5 h-5" />
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-[10px] text-slate-500 font-bold uppercase">Call Anytime</span>
-                                <span className="text-navy-900 font-bold text-sm">+256 393 000 578</span>
+                                <span className="text-[10px] text-slate-400 font-bold uppercase">Call Anytime</span>
+                                <span className="text-white font-bold text-sm">+256 393 000 578</span>
                             </div>
                         </div>
 
                         {/* AI Voice Support Button */}
-                        <button className="bg-navy-900 text-white px-6 py-3 rounded-full flex items-center gap-2 font-bold text-xs uppercase tracking-wide hover:bg-navy-800 transition-colors shadow-lg shadow-navy-900/20">
+                        <button className="bg-coral-600 text-white px-6 py-3 rounded-full flex items-center gap-2 font-bold text-xs uppercase tracking-wide hover:bg-coral-500 transition-colors shadow-lg shadow-coral-900/20">
                             <Mic className="w-4 h-4" />
                             AI Voice Support
                         </button>
@@ -131,7 +143,7 @@ const Navbar = () => {
                     <div className="xl:hidden">
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="text-navy-900 hover:text-coral-500 transition-colors"
+                            className="text-white hover:text-coral-500 transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>

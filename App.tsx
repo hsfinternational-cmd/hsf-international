@@ -11,6 +11,8 @@ import ChairmanProfile from './views/ChairmanProfile';
 import Portfolio from './views/Portfolio';
 import ServiceDetail from './views/ServiceDetail';
 
+import LoadingScreen from './components/LoadingScreen';
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -22,9 +24,12 @@ const ScrollToTop = () => {
 }
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
   return (
     <Router>
       <ScrollToTop />
+      <LoadingScreen onComplete={() => setIsLoading(false)} />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

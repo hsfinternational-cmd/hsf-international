@@ -74,15 +74,21 @@ const Footer = () => {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20"
                 >
 
-                    {/* Column 1: Brand & Social */}
+                    {/* Logo & Description */}
                     <motion.div variants={itemVariants} className="space-y-6">
-                        <Link to="/" className="flex items-center gap-3 mb-6 group">
-                            <div className="text-coral-500 font-heading font-black text-3xl leading-none group-hover:rotate-12 transition-transform duration-300">H</div>
-                            <span className="text-coral-500 font-bold text-xs tracking-[0.2em] uppercase">HSF INTERNATIONAL</span>
-                        </Link>
-                        <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
-                            HSF International excels in diverse industries, offering expert consulting and services. We bridge business gaps, ensuring efficiency and success.
-                        </p>
+                        <div>
+                            <div className="flex items-center gap-3 mb-6">
+                                <img
+                                    src="/assets/logo-full.jpg"
+                                    alt="HSF International"
+                                    className="h-12 w-auto object-contain mix-blend-screen"
+                                />
+                            </div>
+                            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                                We are a global contractor-aggregator, bridging international expertise with local execution.
+                                Building the future of infrastructure, energy, and logistics.
+                            </p>
+                        </div>
                         <div className="flex gap-3">
                             {[
                                 { Icon: Twitter, link: "#" },

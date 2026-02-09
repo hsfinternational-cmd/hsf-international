@@ -792,6 +792,7 @@ const RadarChart = ({ stats }: { stats: { label: string, value: number }[] }) =>
             <motion.polygon
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 0.6, scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 points={dataPoints}
                 fill="rgba(34, 197, 94, 0.2)" // Green 500 equivalent

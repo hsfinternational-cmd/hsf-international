@@ -58,7 +58,7 @@ const RadarChart = ({ stats }: { stats: any }) => {
 
     return (
         <div className="relative w-full flex justify-center items-center py-2">
-            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+            <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-auto max-w-[280px]">
                 {/* Background Heptagon Grid */}
                 {[20, 45, 70].map((r, i) => (
                     <polygon
@@ -75,6 +75,7 @@ const RadarChart = ({ stats }: { stats: any }) => {
                 <motion.polygon
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 0.8, scale: 1 }}
+                    viewport={{ once: true, margin: "-10%" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     points={getPolyCoords(stats, radius, center)}
                     fill="rgba(34, 197, 94, 0.15)" // green-500/15
